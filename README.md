@@ -2,7 +2,7 @@
 
 Enterprise-grade demonstration of [Mem0](https://mem0.ai) - A self-improving memory layer for Agentic AI applications with Neo4j Graph Store integration.
 
-## 🚀 Features
+## Features
 
 - **Persistent Memory Layer**: Store and retrieve AI memories with semantic search
 - **Neo4j Graph Store**: Visualize entity relationships in a knowledge graph
@@ -11,7 +11,7 @@ Enterprise-grade demonstration of [Mem0](https://mem0.ai) - A self-improving mem
 - **Educational Content**: Learn about Mem0's features with live code examples
 - **Beautiful UI**: Modern, responsive design with TailwindCSS and Framer Motion
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: Next.js 15, React 18, TypeScript
 - **Styling**: TailwindCSS, Radix UI, Framer Motion
@@ -19,7 +19,7 @@ Enterprise-grade demonstration of [Mem0](https://mem0.ai) - A self-improving mem
 - **Memory**: Mem0 with Neo4j Graph Store
 - **Database**: Neo4j for graph-based memory storage
 
-## 📦 Installation
+## Installation
 
 1. Clone the repository:
 ```bash
@@ -52,7 +52,7 @@ npm run dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 🎯 Usage
+## Usage
 
 ### Chat Interface
 - Type messages in the chat input
@@ -69,7 +69,7 @@ npm run dev
 - View code examples for each operation
 - Understand how memory operations work
 
-## 🔑 Key Concepts
+## Key Concepts
 
 ### Memory Operations
 
@@ -93,7 +93,7 @@ const memories = await memory.getAll({ user_id: "user123" });
 await memory.delete(memoryId);
 ```
 
-## 🌐 Neo4j Graph Store
+## Neo4j Graph Store
 
 The application uses Neo4j to store entity relationships, enabling:
 - Complex relationship queries
@@ -101,22 +101,22 @@ The application uses Neo4j to store entity relationships, enabling:
 - Knowledge graph visualization
 - Contextual memory retrieval
 
-## 📚 Learn More
+## Learn More
 
 - [Mem0 Documentation](https://docs.mem0.ai)
 - [Neo4j Documentation](https://neo4j.com/docs/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Vercel AI SDK](https://sdk.vercel.ai)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
-## 📄 License
+## License
 
 MIT License
 
-## 🔗 Links
+## Links
 
 - Website: [aianytime.net](https://aianytime.net)
 - YouTube: [AI Anytime](https://www.youtube.com/@AIAnytime)
