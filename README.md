@@ -24,7 +24,7 @@ Enterprise-grade demonstration of [Mem0](https://mem0.ai) - A self-improving mem
 1. Clone the repository:
 ```bash
 git clone https://github.com/AIAnytime/Mem0-Agentic-Memory-Layer
-cd Mem0-Agentic-GraphRAG-
+cd Mem0-Agentic-Memory-Layer
 ```
 
 2. Install dependencies:
