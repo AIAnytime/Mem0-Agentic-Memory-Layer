@@ -24,7 +24,7 @@ interface Memory {
 
 export function MemoryPanel() {
   const [memories, setMemories] = useState<Memory[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
 
   const fetchMemories = useCallback(async () => {

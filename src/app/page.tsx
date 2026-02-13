@@ -1,3 +1,5 @@
+"use client";
+
 import { Chat } from "@/components/chat";
 import { MemoryPanel } from "@/components/memory-panel";
 import { ConceptSection } from "@/components/concept-section";

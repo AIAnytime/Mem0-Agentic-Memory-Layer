@@ -29,18 +29,27 @@ interface ToolInvocation {
 
 interface Message {
   id: string;
-  role: "user" | "assistant" | "system";
+  role: "user" | "assistant" | "system" | "data";
   content: string;
   toolInvocations?: ToolInvocation[];
 }
 
 export function Chat() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } =
+  const { messages, input, handleInputChange, handleSubmit, isLoading, error } =
     useChat({
       api: "/api/chat",
+      onError: (error) => {
+        console.error("Chat error:", error);
+      },
     });
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showToolDetails, setShowToolDetails] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (error) {
+      console.error("Chat error state:", error);
+    }
+  }, [error]);
 
   useEffect(() => {
     if (scrollRef.current) {

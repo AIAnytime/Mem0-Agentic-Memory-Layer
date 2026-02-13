@@ -5,35 +5,49 @@ import { memoryTools } from "@/lib/tools";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  try {
+    const { messages } = await req.json();
 
-  const result = streamText({
-    model: openai("gpt-4o"),
-    messages,
-    tools: memoryTools,
-    system: `You are a helpful AI assistant with persistent memory capabilities powered by Mem0.
+    if (!process.env.OPENAI_API_KEY) {
+      console.error("OPENAI_API_KEY is not set");
+      return new Response(
+        JSON.stringify({ error: "OpenAI API key not configured" }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
 
-Your memory abilities:
-- You can SEARCH memories to find relevant information about the user from past conversations
-- You can CREATE memories to store important user information for future reference
-- You can GET ALL memories to see everything you know about the user
-- You can DELETE memories that are no longer needed
+    console.log("Starting chat with", messages.length, "messages");
 
-Guidelines:
-1. When the user shares personal information, preferences, or important facts, use createMemory to save it
-2. When answering questions that might relate to past conversations, use searchMemory first
-3. Be proactive about remembering useful information without being asked
-4. When you save or find memories, briefly mention what you remembered/stored
-5. Be conversational and helpful while demonstrating memory capabilities
+    const result = streamText({
+      model: openai("gpt-4o"),
+      messages,
+      tools: memoryTools,
+      system: `You are an AI assistant with memory capabilities. You MUST use memory tools.
 
-The memory system uses:
-- Vector Store for semantic search
-- Neo4j Graph Store for relationship mapping between entities
-- OpenAI embeddings for semantic understanding
+CRITICAL RULES:
+1. ALWAYS use createMemory when user shares: name, job, interests, preferences, or personal info
+2. ALWAYS use searchMemory before answering questions about the user
+3. Tell user what you're remembering: "I'll remember that..." or "Let me save that..."
 
-Always explain what you're doing with memories to help users understand how AI memory works.`,
-    maxSteps: 5,
-  });
+Examples:
+- User: "My name is John" → MUST call createMemory("name is John")
+- User: "I work at Google" → MUST call createMemory("works at Google")
+- User: "What's my name?" → MUST call searchMemory("name")
 
-  return result.toDataStreamResponse();
+Be conversational but USE THE TOOLS.`,
+      maxSteps: 5,
+    });
+
+    return result.toDataStreamResponse();
+  } catch (error) {
+    console.error("Chat API error:", error);
+    console.error("Error details:", error instanceof Error ? error.message : String(error));
+    return new Response(
+      JSON.stringify({ 
+        error: error instanceof Error ? error.message : "An error occurred",
+        details: error instanceof Error ? error.stack : String(error)
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
 }

@@ -45,9 +45,11 @@ export const createMemory = tool({
   }),
   execute: async ({ content }) => {
     try {
+      console.log("Creating memory with content:", content);
       const memory = getMemoryInstance();
       const messages = [{ role: "user" as const, content }];
       const result = await memory.add(messages, { userId: DEFAULT_USER_ID });
+      console.log("Memory created successfully:", result);
 
       return {
         success: true,
